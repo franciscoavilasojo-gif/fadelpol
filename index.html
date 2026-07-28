@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FADEPOL · Piscinas, Depósitos y Fosas Sépticas de Poliéster · Casariche, Sevilla</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
 <meta name="description" content="Fabricación artesanal de piscinas, depósitos y fosas sépticas de poliéster en Casariche, Sevilla. 20 años de experiencia. Presupuesto sin compromiso por WhatsApp.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,6 +33,63 @@
     color:var(--ink);
     background:var(--white);
     -webkit-font-smoothing:antialiased;
+  }
+  /* 1. EFECTO ZOOM PREMIUM (Tarjetas y Galería) */
+  .card-visual img {
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+  .card:hover .card-visual img {
+    transform: scale(1.12);
+  }
+  .gallery-item {
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+  }
+  .gallery-item:hover {
+    transform: translateY(-5px) scale(1.02);
+    z-index: 10;
+    box-shadow: 0 25px 50px -12px rgba(0,0,0,0.6);
+  }
+
+  /* 2. EFECTO PARALLAX EN EL HERO */
+  /* NOTA: Cambia 'galeria1.jpg' por una foto panorámica de tu taller o piscina */
+  .hero {
+    background: linear-gradient(180deg, rgba(11,37,64,0.92) 0%, rgba(18,52,84,0.92) 60%, rgba(11,37,64,0.95) 100%), 
+                url('galeria1.jpg') center/cover fixed no-repeat !important;
+  }
+
+  /* 3. CINTA TRANSPORTADORA (Animación Marquee) */
+  .marquee-wrapper {
+    overflow: hidden;
+    background: var(--navy-2);
+    color: #DCE7EE;
+    padding: 18px 0;
+    white-space: nowrap;
+    display: flex;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .marquee-content {
+    display: flex;
+    gap: 40px;
+    animation: scrollMarquee 25s linear infinite;
+  }
+  .marquee-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13.5px;
+    font-weight: 600;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+  .marquee-item::before {
+    content: "★";
+    color: var(--aqua-light);
+    font-size: 16px;
+  }
+  @keyframes scrollMarquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
   }
   h1,h2,h3,.display{
     font-family:'Sora',system-ui,sans-serif;
@@ -274,10 +332,10 @@
 <!-- HEADER -->
 <header id="site-header">
   <nav class="nav wrap">
-    <a href="#inicio" class="brand">
-      <span class="brand-mark">F</span>
-      <span>FADEPOL<br><small>Poliéster · Sevilla</small></span>
-    </a>
+  <a href="#inicio" class="brand" style="gap: 0px; align-items: center;">
+  <img src="logo-fadepol.png" alt="Logo de FADEPOL" style="width: 100px; height: auto; object-fit: contain; margin-left: -16px; margin-right: -8px; margin-top: 2px; filter: brightness(0.2) contrast(1.5) drop-shadow(0px 1px 1px rgba(11, 37, 64, 0.4));">
+  <span style="font-size: 24px; line-height: 1.1; color: var(--navy);">FADEPOL<br><small style="font-size: 13px; font-weight: 600; color: #5B6B76;"><span style="color: #1E9DB8;">POLIÉSTER</span> · SEVILLA</small></span>
+</a>
     <div class="nav-links" id="navLinks">
       <a href="#inicio">Inicio</a>
       <a href="#productos">Productos</a>
@@ -309,29 +367,39 @@
         <div class="hero-stat"><b>+300</b><span>proyectos entregados</span></div>
       </div>
     </div>
-    <div class="facet-art">
-      <div class="facet-glow"></div>
-      <svg viewBox="0 0 400 400">
-        <polygon class="facet-poly" points="200,20 320,100 300,220 180,260 80,180"/>
-        <polygon class="facet-poly alt" points="200,20 320,100 260,150 160,90"/>
-        <polygon class="facet-poly" points="320,100 300,220 380,250 360,140"/>
-        <polygon class="facet-poly alt" points="180,260 300,220 320,340 220,380"/>
-        <polygon class="facet-poly" points="80,180 180,260 220,380 100,360 40,260"/>
-        <polygon class="facet-poly alt" points="160,90 260,150 180,260 80,180"/>
-        <circle cx="200" cy="180" r="3" fill="#5CC6DA"/>
-        <circle cx="300" cy="220" r="3" fill="#5CC6DA"/>
-        <circle cx="180" cy="260" r="3" fill="#5CC6DA"/>
-      </svg>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; position: relative; max-width: 480px; margin: 0 auto;">
+      <!-- Aura luminosa de fondo -->
+      <div style="position: absolute; inset: -30px; background: radial-gradient(circle, rgba(30,157,184,0.4) 0%, transparent 65%); filter: blur(30px); z-index: 0;"></div>
+      
+      <!-- Foto 1: Principal (Izquierda, alta) -->
+      <img src="piscina.png" alt="Fadepol Trabajo 1" style="position: relative; z-index: 1; width: 100%; height: 100%; min-height: 320px; object-fit: cover; border-radius: 20px; grid-row: span 2; box-shadow: 0 20px 40px -10px rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1);">
+      
+      <!-- Foto 2: Secundaria (Arriba derecha) -->
+      <img src="fosa-1.avif" alt="Fadepol Trabajo 2" style="position: relative; z-index: 1; width: 100%; height: 152px; object-fit: cover; border-radius: 20px; box-shadow: 0 15px 30px -10px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1);">
+      
+      <!-- Foto 3: Terciaria (Abajo derecha) -->
+      <img src="piscina2.png" alt="Fadepol Trabajo 3" style="position: relative; z-index: 1; width: 100%; height: 152px; object-fit: cover; border-radius: 20px; box-shadow: 0 15px 30px -10px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1);">
     </div>
   </div>
 </section>
 
-<div class="strip">
-  <div class="wrap">
-    <span>Fabricación propia</span>
-    <span>Instalación incluida</span>
-    <span>Calidad garantizada</span>
-    <span>Presupuesto sin compromiso</span>
+<!-- CINTA TRANSPORTADORA ANIMADA -->
+<div class="marquee-wrapper">
+  <!-- El contenido está duplicado por dentro para que el bucle sea infinito y sin cortes -->
+  <div class="marquee-content">
+    <span class="marquee-item">10 Años de Garantía</span>
+    <span class="marquee-item">Fabricación Artesanal</span>
+    <span class="marquee-item">Casariche, Sevilla</span>
+    <span class="marquee-item">Instalación Llave en Mano</span>
+    <span class="marquee-item">Materiales Homologados</span>
+    <span class="marquee-item">Presupuesto sin compromiso</span>
+    <!-- Repetición para el bucle -->
+    <span class="marquee-item">10 Años de Garantía</span>
+    <span class="marquee-item">Fabricación Artesanal</span>
+    <span class="marquee-item">Casariche, Sevilla</span>
+    <span class="marquee-item">Instalación Llave en Mano</span>
+    <span class="marquee-item">Materiales Homologados</span>
+    <span class="marquee-item">Presupuesto sin compromiso</span>
   </div>
 </div>
 
@@ -345,8 +413,8 @@
     </div>
     <div class="cards">
       <div class="card reveal">
-        <div class="card-visual">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M2 20c2 1.5 4 1.5 6 0s4-1.5 6 0 4 1.5 6 0M4 15V6a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+       <div class="card-visual">
+          <img src="piscina.png" alt="Piscinas de poliéster" style="width: 100%; height: 100%; object-fit: cover;">
         </div>
         <div class="card-body">
           <h3>Piscinas de Poliéster</h3>
@@ -361,7 +429,7 @@
       </div>
       <div class="card reveal">
         <div class="card-visual">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="6" y="4" width="12" height="16" rx="2"/><path d="M9 4V2h6v2" stroke-linecap="round"/></svg>
+          <img src="bidon.png" alt="Depósitos de poliéster" style="width: 100%; height: 100%; object-fit: cover; object-position: top;">
         </div>
         <div class="card-body">
           <h3>Depósitos y Bidones</h3>
@@ -376,7 +444,7 @@
       </div>
       <div class="card reveal">
         <div class="card-visual">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M4 10h16v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8Z"/><path d="M8 10V6a4 4 0 0 1 8 0v4" stroke-linecap="round"/></svg>
+          <img src="fosa2.webp" alt="Fosas sépticas de poliéster" style="width: 100%; height: 100%; object-fit: cover;">
         </div>
         <div class="card-body">
           <h3>Fosas Sépticas</h3>
@@ -404,14 +472,13 @@
       <a href="https://instagram.com/fadepol_sl" class="btn btn-ghost" target="_blank" rel="noopener">Ver en Instagram</a>
     </div>
     <div class="gallery-grid">
-      <div class="gallery-item reveal"><svg viewBox="0 0 24 24" fill="none" stroke-width="1"><path d="M2 20c2 1.5 4 1.5 6 0s4-1.5 6 0 4 1.5 6 0"/></svg><span>Piscina residencial</span></div>
-      <div class="gallery-item reveal"><svg viewBox="0 0 24 24" fill="none" stroke-width="1"><rect x="4" y="4" width="16" height="16" rx="2"/></svg><span>Fabricación en taller</span></div>
-      <div class="gallery-item reveal"><svg viewBox="0 0 24 24" fill="none" stroke-width="1"><circle cx="12" cy="12" r="8"/></svg><span>Acabados y detalle</span></div>
-      <div class="gallery-item reveal"><svg viewBox="0 0 24 24" fill="none" stroke-width="1"><path d="M3 12h18M12 3v18"/></svg><span>Taller de Casariche</span></div>
-      <div class="gallery-item reveal"><svg viewBox="0 0 24 24" fill="none" stroke-width="1"><path d="M4 10h16v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8Z"/></svg><span>Depósitos a medida</span></div>
-      <div class="gallery-item reveal"><svg viewBox="0 0 24 24" fill="none" stroke-width="1"><path d="M2 20c2 1.5 4 1.5 6 0s4-1.5 6 0 4 1.5 6 0M4 15V6a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v9"/></svg><span>Instalación final</span></div>
+      <div class="gallery-item reveal" style="background: url('piscina2.png') center/cover no-repeat;"><span>Piscina </span></div>
+      <div class="gallery-item reveal" style="background: url('fosa-1.avif') center/cover no-repeat;"><span>Fosas</span></div>
+      <div class="gallery-item reveal" style="background: url('piscina.png') center/cover no-repeat;"><span>Piscina</span></div>
+      <div class="gallery-item reveal" style="background: url('Captura\ de\ pantalla\ 2026-07-28\ 174030.png') center/cover no-repeat;"><span>Deposito</span></div>
+      <div class="gallery-item reveal" style="background: url('depositos.png') center/cover no-repeat;"><span>Depósitos a medida</span></div>
+      <div class="gallery-item reveal" style="background: url('bidon.png') center/cover no-repeat;"><span>Bidones</span></div>
     </div>
-    <p class="gallery-note">* Imágenes de muestra — se sustituirán por fotografías reales de nuestros proyectos.</p>
   </div>
 </section>
 
