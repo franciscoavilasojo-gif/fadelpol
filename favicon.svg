@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Fondo corporativo (Navy) con borde brillante (Aqua) -->
+  <circle cx="256" cy="256" r="230" fill="#0B2540" stroke="#1E9DB8" stroke-width="24"/>
+  <!-- Letra F imponente y legible en color Aqua -->
+  <path d="M190 150 h150 v50 h-90 v60 h80 v50 h-80 v100 h-60 z" fill="#FFFFFF"/>
+</svg>
