@@ -119,6 +119,61 @@
   section{padding:96px 0;}
   @media(max-width:768px){section{padding:64px 0;}}
 
+  /* =======================================================
+     NUEVO: ESTILOS DEL LIGHTBOX (AMPLIAR FOTO) 
+     ======================================================= */
+  .lightbox-overlay {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    z-index: 1000; /* Por encima de todo */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.95); /* Fondo oscuro premium */
+    cursor: zoom-out; /* Indica que se puede cerrar */
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .lightbox-overlay.active {
+    display: flex;
+    opacity: 1;
+  }
+
+  .lightbox-content {
+    max-width: 90%;
+    max-height: 90%;
+    border: 3px solid #ffffff;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+  }
+
+  .lightbox-overlay.active .lightbox-content {
+    transform: scale(1); /* Efecto pop-in */
+  }
+
+  .lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 60px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+  }
+
+  .lightbox-close:hover {
+    color: #38bdf8; /* Usando el color Aqua de acento */
+  }
+
+
+
+
   /* HEADER */
   header{
     position:fixed;top:0;left:0;right:0;z-index:100;
@@ -329,6 +384,8 @@
 </head>
 <body>
 
+<body>
+
 <!-- HEADER -->
 <header id="site-header">
   <nav class="nav wrap">
@@ -349,6 +406,49 @@
     </div>
   </nav>
 </header>
+
+<!-- CONTENEDOR DEL LIGHTBOX (Fuera del contenido principal) -->
+<div id="lightbox" class="lightbox-overlay" onclick="closeLightbox()">
+  <span class="lightbox-close">&times;</span>
+  <img class="lightbox-content" id="lightbox-img" src="" alt="Ampliación">
+</div>
+
+<!-- MOTOR DE AMPLIACIÓN (JavaScript MEJORADO) -->
+<script>
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+
+  function openLightbox(element) {
+    let imgSrc = '';
+    
+    // 1. Si el elemento al que hicimos clic es directamente una imagen
+    if (element.tagName === 'IMG') {
+        imgSrc = element.src;
+    } 
+    // 2. Si es un contenedor (como las tarjetas) y tiene una imagen dentro
+    else if (element.querySelector('img')) {
+        imgSrc = element.querySelector('img').src;
+    } 
+    // 3. Si es un elemento con imagen de fondo (como la galería)
+    else {
+        const bg = window.getComputedStyle(element).backgroundImage;
+        if (bg && bg !== 'none') {
+            imgSrc = bg.replace(/(url\(|\)|"|')/g, ''); // Extrae la URL limpia
+        }
+    }
+
+    if (imgSrc) {
+        lightboxImg.src = imgSrc;
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden'; 
+    }
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('active');
+    document.body.style.overflow = 'auto'; 
+  }
+</script>
 
 <!-- HERO -->
 <section class="hero" id="inicio">
@@ -371,21 +471,18 @@
       <!-- Aura luminosa de fondo -->
       <div style="position: absolute; inset: -30px; background: radial-gradient(circle, rgba(30,157,184,0.4) 0%, transparent 65%); filter: blur(30px); z-index: 0;"></div>
       
-      <!-- Foto 1: Principal (Izquierda, alta) -->
-      <img src="piscina.png" alt="Fadepol Trabajo 1" style="position: relative; z-index: 1; width: 100%; height: 100%; min-height: 320px; object-fit: cover; border-radius: 20px; grid-row: span 2; box-shadow: 0 20px 40px -10px rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1);">
+      <!-- INYECCIÓN: Lupa añadida a las 3 fotos principales -->
+      <img src="piscina.png" alt="Fadepol Trabajo 1" onclick="openLightbox(this)" style="position: relative; z-index: 1; width: 100%; height: 100%; min-height: 320px; object-fit: cover; border-radius: 20px; grid-row: span 2; box-shadow: 0 20px 40px -10px rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1); cursor: zoom-in;">
       
-      <!-- Foto 2: Secundaria (Arriba derecha) -->
-      <img src="fosa-1.avif" alt="Fadepol Trabajo 2" style="position: relative; z-index: 1; width: 100%; height: 152px; object-fit: cover; border-radius: 20px; box-shadow: 0 15px 30px -10px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1);">
+      <img src="fosa-1.avif" alt="Fadepol Trabajo 2" onclick="openLightbox(this)" style="position: relative; z-index: 1; width: 100%; height: 152px; object-fit: cover; border-radius: 20px; box-shadow: 0 15px 30px -10px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); cursor: zoom-in;">
       
-      <!-- Foto 3: Terciaria (Abajo derecha) -->
-      <img src="piscina2.png" alt="Fadepol Trabajo 3" style="position: relative; z-index: 1; width: 100%; height: 152px; object-fit: cover; border-radius: 20px; box-shadow: 0 15px 30px -10px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1);">
+      <img src="piscina2.png" alt="Fadepol Trabajo 3" onclick="openLightbox(this)" style="position: relative; z-index: 1; width: 100%; height: 152px; object-fit: cover; border-radius: 20px; box-shadow: 0 15px 30px -10px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); cursor: zoom-in;">
     </div>
   </div>
 </section>
 
 <!-- CINTA TRANSPORTADORA ANIMADA -->
 <div class="marquee-wrapper">
-  <!-- El contenido está duplicado por dentro para que el bucle sea infinito y sin cortes -->
   <div class="marquee-content">
     <span class="marquee-item">10 Años de Garantía</span>
     <span class="marquee-item">Fabricación Artesanal</span>
@@ -393,7 +490,6 @@
     <span class="marquee-item">Instalación Llave en Mano</span>
     <span class="marquee-item">Materiales Homologados</span>
     <span class="marquee-item">Presupuesto sin compromiso</span>
-    <!-- Repetición para el bucle -->
     <span class="marquee-item">10 Años de Garantía</span>
     <span class="marquee-item">Fabricación Artesanal</span>
     <span class="marquee-item">Casariche, Sevilla</span>
@@ -412,7 +508,8 @@
       <p>Cada proyecto se fabrica en nuestro taller de Casariche siguiendo procesos artesanales perfeccionados durante dos décadas.</p>
     </div>
     <div class="cards">
-      <div class="card reveal">
+      <!-- INYECCIÓN: Lupa añadida a las tarjetas -->
+      <div class="card reveal" onclick="openLightbox(this)" style="cursor: zoom-in;">
        <div class="card-visual">
           <img src="piscina.png" alt="Piscinas de poliéster" style="width: 100%; height: 100%; object-fit: cover;">
         </div>
@@ -427,7 +524,8 @@
           <a href="https://wa.me/34691043095" class="card-link" target="_blank" rel="noopener">Consultar por WhatsApp →</a>
         </div>
       </div>
-      <div class="card reveal">
+      
+      <div class="card reveal" onclick="openLightbox(this)" style="cursor: zoom-in;">
         <div class="card-visual">
           <img src="bidon.png" alt="Depósitos de poliéster" style="width: 100%; height: 100%; object-fit: cover; object-position: top;">
         </div>
@@ -442,7 +540,8 @@
           <a href="https://wa.me/34691043095" class="card-link" target="_blank" rel="noopener">Consultar por WhatsApp →</a>
         </div>
       </div>
-      <div class="card reveal">
+      
+      <div class="card reveal" onclick="openLightbox(this)" style="cursor: zoom-in;">
         <div class="card-visual">
           <img src="fosa2.webp" alt="Fosas sépticas de poliéster" style="width: 100%; height: 100%; object-fit: cover;">
         </div>
@@ -472,12 +571,13 @@
       <a href="https://instagram.com/fadepol_sl" class="btn btn-ghost" target="_blank" rel="noopener">Ver en Instagram</a>
     </div>
     <div class="gallery-grid">
-      <div class="gallery-item reveal" style="background: url('piscina2.png') center/cover no-repeat;"><span>Piscina </span></div>
-      <div class="gallery-item reveal" style="background: url('fosa-1.avif') center/cover no-repeat;"><span>Fosas</span></div>
-      <div class="gallery-item reveal" style="background: url('piscina.png') center/cover no-repeat;"><span>Piscina</span></div>
-      <div class="gallery-item reveal" style="background: url('Captura\ de\ pantalla\ 2026-07-28\ 174030.png') center/cover no-repeat;"><span>Deposito</span></div>
-      <div class="gallery-item reveal" style="background: url('depositos.png') center/cover no-repeat;"><span>Depósitos a medida</span></div>
-      <div class="gallery-item reveal" style="background: url('bidon.png') center/cover no-repeat;"><span>Bidones</span></div>
+      <!-- INYECCIÓN: Lupa añadida a la galería -->
+      <div class="gallery-item reveal" onclick="openLightbox(this)" style="background: url('piscina2.png') center/cover no-repeat; cursor: zoom-in;"><span>Piscina </span></div>
+      <div class="gallery-item reveal" onclick="openLightbox(this)" style="background: url('fosa-1.avif') center/cover no-repeat; cursor: zoom-in;"><span>Fosas</span></div>
+      <div class="gallery-item reveal" onclick="openLightbox(this)" style="background: url('piscina.png') center/cover no-repeat; cursor: zoom-in;"><span>Piscina</span></div>
+      <div class="gallery-item reveal" onclick="openLightbox(this)" style="background: url('Captura\ de\ pantalla\ 2026-07-28\ 174030.png') center/cover no-repeat; cursor: zoom-in;"><span>Deposito</span></div>
+      <div class="gallery-item reveal" onclick="openLightbox(this)" style="background: url('depositos.png') center/cover no-repeat; cursor: zoom-in;"><span>Depósitos a medida</span></div>
+      <div class="gallery-item reveal" onclick="openLightbox(this)" style="background: url('bidon.png') center/cover no-repeat; cursor: zoom-in;"><span>Bidones</span></div>
     </div>
   </div>
 </section>
@@ -658,4 +758,3 @@
   });
 </script>
 </body>
-</html>
