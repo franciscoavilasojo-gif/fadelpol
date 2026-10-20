@@ -119,6 +119,31 @@
   section{padding:96px 0;}
   @media(max-width:768px){section{padding:64px 0;}}
 
+  /* ETIQUETA NOVEDAD MEGA VISIBLE PARA GALERÍA */
+  .badge-novedad {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: linear-gradient(135deg, #EF4444, #DC2626); /* Rojo brillante y puro */
+    color: #fff;
+    font-size: 13px; /* Texto mucho más grande */
+    font-weight: 900; /* Extra negrita */
+    padding: 8px 18px; /* Etiqueta más ancha */
+    border-radius: 50px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    z-index: 3;
+    border: 2px solid #ffffff; /* Borde blanco para resaltar sobre la foto */
+    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.6);
+    animation: pulse-novedad 1.5s infinite; /* Animación de onda expansiva */
+  }
+
+  @keyframes pulse-novedad {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+    50% { transform: scale(1.08); box-shadow: 0 0 0 12px rgba(239, 68, 68, 0); }
+    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+  }
+
   /* =======================================================
      NUEVO: ESTILOS DEL LIGHTBOX (AMPLIAR FOTO) 
      ======================================================= */
@@ -572,12 +597,16 @@
     </div>
     <div class="gallery-grid">
       <!-- INYECCIÓN: Lupa añadida a la galería -->
-      <div class="gallery-item reveal" onclick="openLightbox(this)" style="background: url('piscina2.png') center/cover no-repeat; cursor: zoom-in;"><span>Piscina </span></div>
-      <div class="gallery-item reveal" onclick="openLightbox(this)" style="background: url('fosa.png') center/cover no-repeat; cursor: zoom-in;"><span>Fosas</span></div>
+      <div class="gallery-item reveal" onclick="openLightbox(this)" style="background: url('fosa3000.png') center/cover no-repeat; cursor: zoom-in;">
+        <span class="badge-novedad">¡Novedad!</span>
+        <span>Fosa 3000 Litros</span>
+      </div>      
       <div class="gallery-item reveal" onclick="openLightbox(this)" style="background: url('piscina.png') center/cover no-repeat; cursor: zoom-in;"><span>Piscina</span></div>
       <div class="gallery-item reveal" onclick="openLightbox(this)" style="background: url('Captura\ de\ pantalla\ 2026-07-28\ 174030.png') center/cover no-repeat; cursor: zoom-in;"><span>Depósito</span></div>
       <div class="gallery-item reveal" onclick="openLightbox(this)" style="background: url('depositos.png') center/cover no-repeat; cursor: zoom-in;"><span>Depósitos a medida</span></div>
       <div class="gallery-item reveal" onclick="openLightbox(this)" style="background: url('bidon.png') center/cover no-repeat; cursor: zoom-in;"><span>Bidones</span></div>
+      <div class="gallery-item reveal" onclick="openLightbox(this)" style="background: url('piscina2.png') center/cover no-repeat; cursor: zoom-in;"><span>Piscina </span></div>
+
     </div>
   </div>
 </section>
