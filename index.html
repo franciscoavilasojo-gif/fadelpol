@@ -119,31 +119,6 @@
   section{padding:96px 0;}
   @media(max-width:768px){section{padding:64px 0;}}
 
-  /* ETIQUETA NOVEDAD MEGA VISIBLE PARA GALERÍA */
-  .badge-novedad {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    background: linear-gradient(135deg, #EF4444, #DC2626); /* Rojo brillante y puro */
-    color: #fff;
-    font-size: 13px; /* Texto mucho más grande */
-    font-weight: 900; /* Extra negrita */
-    padding: 8px 18px; /* Etiqueta más ancha */
-    border-radius: 50px;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    z-index: 3;
-    border: 2px solid #ffffff; /* Borde blanco para resaltar sobre la foto */
-    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.6);
-    animation: pulse-novedad 1.5s infinite; /* Animación de onda expansiva */
-  }
-
-  @keyframes pulse-novedad {
-    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
-    50% { transform: scale(1.08); box-shadow: 0 0 0 12px rgba(239, 68, 68, 0); }
-    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
-  }
-
   /* =======================================================
      NUEVO: ESTILOS DEL LIGHTBOX (AMPLIAR FOTO) 
      ======================================================= */
@@ -306,6 +281,22 @@
   .gallery-item svg{position:absolute;opacity:.16;width:80%;height:80%;top:10%;left:10%;stroke:#fff;}
   .gallery-note{margin-top:20px;font-size:13px;color:var(--ink-soft);}
 
+  /* NOVEDADES (nuevo apartado) */
+  .novedades-block{margin-bottom:44px;}
+  .novedades-title{display:flex;align-items:center;gap:12px;margin-bottom:20px;font-family:'Sora',system-ui,sans-serif;font-size:20px;color:var(--navy);}
+  .novedades-badge{background:#E53935;color:#fff;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:6px 14px;border-radius:100px;}
+  .novedades-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+  @media(max-width:768px){.novedades-grid{grid-template-columns:1fr;}}
+  .novedad-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow);transition:transform .25s ease, box-shadow .25s ease;}
+  .novedad-card:hover{transform:translateY(-6px);box-shadow:0 24px 44px -18px rgba(11,37,64,.28);}
+  .novedad-img{position:relative;height:260px;overflow:hidden;background:linear-gradient(135deg,var(--navy),var(--navy-2));}
+  .novedad-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(0.25,1,0.5,1);}
+  .novedad-card:hover .novedad-img img{transform:scale(1.08);}
+  .novedad-img .novedades-badge{position:absolute;top:16px;left:16px;}
+  .novedad-body{padding:24px 26px 28px;}
+  .novedad-body h3{font-size:19px;color:var(--navy);margin-bottom:8px;}
+  .novedad-body p{font-size:14.5px;color:var(--ink-soft);line-height:1.6;margin-bottom:16px;}
+
   /* ABOUT */
   #nosotros{background:var(--gray-bg);}
   .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;}
@@ -405,6 +396,23 @@
     .reveal{opacity:1;transform:none;transition:none;}
     .wa-pulse{animation:none;}
   }
+
+
+      .novedad-img.entera{background:#fff;}
+  .novedad-img.entera img{object-fit:contain;padding:0;transform:scale(1.6);}
+  .novedad-card:hover .novedad-img.entera img{transform:scale(1.7);}
+
+
+    /* CARRUSEL DE NOVEDADES */
+  .slider-track{display:flex;height:100%;transition:transform .5s ease;}
+  .slider-track img{min-width:100%;height:100%;object-fit:cover;flex-shrink:0;cursor:zoom-in;}
+  .novedad-card:hover .novedad-img.slider img{transform:none;}
+  .slider-btn{position:absolute;top:50%;transform:translateY(-50%);width:38px;height:38px;border-radius:50%;border:none;background:rgba(255,255,255,.92);color:var(--navy);font-size:22px;line-height:1;cursor:pointer;z-index:3;box-shadow:0 4px 12px rgba(0,0,0,.25);}
+  .slider-btn.prev{left:12px;}
+  .slider-btn.next{right:12px;}
+  .slider-dots{position:absolute;bottom:12px;left:0;right:0;display:flex;justify-content:center;gap:8px;z-index:3;}
+  .slider-dots span{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.55);cursor:pointer;}
+  .slider-dots span.active{background:#fff;}
 </style>
 </head>
 <body>
@@ -595,18 +603,53 @@
       </div>
       <a href="https://instagram.com/fadepol_sl" class="btn btn-ghost" target="_blank" rel="noopener">Ver en Instagram</a>
     </div>
+
+    <!-- NOVEDADES -->
+    <div class="novedades-block reveal">
+      <div class="novedades-title"><span class="novedades-badge">¡Novedades!</span> Lo último de nuestro taller</div>
+      <div class="novedades-grid">
+
+        <div class="novedad-card">
+          <div class="novedad-img entera" onclick="openLightbox(this)" style="cursor: zoom-in;">
+            <img src="fosa3000.png" alt="Nuevo producto 1">
+            <span class="novedades-badge">¡Novedad!</span>
+          </div>
+          <div class="novedad-body">
+            <h3>FOSA 300 L</h3>
+            <p>Fosa séptica con filtro biológico de 3000 litros.</p>
+            <a href="https://wa.me/34691043095" class="card-link" target="_blank" rel="noopener">Consultar por WhatsApp →</a>
+          </div>
+        </div>
+
+        <div class="novedad-card">
+          <div class="novedad-img slider">
+            <div class="slider-track">
+              <img src="piscina-novedad1.webp" alt="Piscina de poliéster 4,5 x 2,5 m" onclick="openLightbox(this)">
+              <img src="piscina-novedad2.webp" alt="Piscina de poliéster 4,5 x 2,5 m, vista interior" onclick="openLightbox(this)">
+            </div>
+            <button class="slider-btn prev" aria-label="Foto anterior">‹</button>
+            <button class="slider-btn next" aria-label="Foto siguiente">›</button>
+            <div class="slider-dots"></div>
+            <span class="novedades-badge">¡Novedad!</span>
+          </div>
+          <div class="novedad-body">
+            <h3>Piscina</h3>
+            <p>Piscina de poliéster 4,5 x 2,5 m.</p>
+            <a href="https://wa.me/34691043095" class="card-link" target="_blank" rel="noopener">Consultar por WhatsApp →</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
     <div class="gallery-grid">
       <!-- INYECCIÓN: Lupa añadida a la galería -->
-      <div class="gallery-item reveal" onclick="openLightbox(this)" style="background: url('fosa3000.png') center/cover no-repeat; cursor: zoom-in;">
-        <span class="badge-novedad">¡Novedad!</span>
-        <span>Fosa 3000 Litros</span>
-      </div>      
+      <div class="gallery-item reveal" onclick="openLightbox(this)" style="background: url('piscina2.png') center/cover no-repeat; cursor: zoom-in;"><span>Piscina </span></div>
+      <div class="gallery-item reveal" onclick="openLightbox(this)" style="background: url('fosa.png') center/cover no-repeat; cursor: zoom-in;"><span>Fosas</span></div>
       <div class="gallery-item reveal" onclick="openLightbox(this)" style="background: url('piscina.png') center/cover no-repeat; cursor: zoom-in;"><span>Piscina</span></div>
       <div class="gallery-item reveal" onclick="openLightbox(this)" style="background: url('Captura\ de\ pantalla\ 2026-07-28\ 174030.png') center/cover no-repeat; cursor: zoom-in;"><span>Depósito</span></div>
       <div class="gallery-item reveal" onclick="openLightbox(this)" style="background: url('depositos.png') center/cover no-repeat; cursor: zoom-in;"><span>Depósitos a medida</span></div>
       <div class="gallery-item reveal" onclick="openLightbox(this)" style="background: url('bidon.png') center/cover no-repeat; cursor: zoom-in;"><span>Bidones</span></div>
-      <div class="gallery-item reveal" onclick="openLightbox(this)" style="background: url('piscina2.png') center/cover no-repeat; cursor: zoom-in;"><span>Piscina </span></div>
-
     </div>
   </div>
 </section>
@@ -792,5 +835,58 @@
     const text = `Hola FADEPOL, soy ${name} (Tel: ${phone}). ${message}`;
     window.open('https://wa.me/34691043095?text=' + encodeURIComponent(text), '_blank');
   });
+
+
+  // ==========================================
+  // MOTOR DEL CARRUSEL DE NOVEDADES
+  // ==========================================
+  const track = document.querySelector('.slider-track');
+  const slides = document.querySelectorAll('.slider-track img');
+  const prevBtn = document.querySelector('.slider-btn.prev');
+  const nextBtn = document.querySelector('.slider-btn.next');
+  const dotsContainer = document.querySelector('.slider-dots');
+
+  if (track && slides.length > 0) {
+    let currentIndex = 0;
+
+    // Crear los puntitos de abajo automáticamente según el número de fotos
+    slides.forEach((_, index) => {
+      const dot = document.createElement('span');
+      if (index === 0) dot.classList.add('active');
+      dot.addEventListener('click', () => goToSlide(index));
+      dotsContainer.appendChild(dot);
+    });
+
+    const dots = document.querySelectorAll('.slider-dots span');
+
+    function updateDots() {
+      dots.forEach(dot => dot.classList.remove('active'));
+      dots[currentIndex].classList.add('active');
+    }
+
+    function goToSlide(index) {
+      currentIndex = index;
+      track.style.transform = `translateX(-${currentIndex * 100}%)`;
+      updateDots();
+    }
+
+    // Botón Siguiente
+    nextBtn.addEventListener('click', () => {
+      if (currentIndex < slides.length - 1) {
+        goToSlide(currentIndex + 1);
+      } else {
+        goToSlide(0); // Vuelve a la primera si estás en la última
+      }
+    });
+
+    // Botón Anterior
+    prevBtn.addEventListener('click', () => {
+      if (currentIndex > 0) {
+        goToSlide(currentIndex - 1);
+      } else {
+        goToSlide(slides.length - 1); // Va a la última si estás en la primera
+      }
+    });
+  }
 </script>
 </body>
